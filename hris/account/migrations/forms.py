@@ -19,3 +19,12 @@ class EmergencyCreateForm(forms.ModelForm):
 	class Meta:
 		model = Emergency
 		fields = ['employee','fullname','tel','location','relationship']
+
+		# FAMILY
+
+		class FamilyCreateForm(forms.ModelForm):
+			class Meta:
+				model = Relationship
+				fields = ['employee', 'status', 'spouse', 'occupation', 'tel', 'children', 'nextofkin', 'contact',
+						  'relationship', 'father', 'foccupation', 'mother', 'moccupation']
+
