@@ -41,6 +41,11 @@ def add_attendance(request):
         attendances = Attendance.objects.all()
         return render(request, 'attendance/view_attendance.html', {'attendances': attendances})
 
+    def my_attendance(request):
+        # Your logic for viewing user-specific attendance goes here
+        return render(request, 'attendance/my_attendance.html')
+
+
 
 
 
