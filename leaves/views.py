@@ -9,4 +9,30 @@ from hris.decorators import allowed_users
 def index(request):
     return render(request,'leaves/index.html')
 
+@allowed_users(allowed_roles=['employee'])
+def add_leaves(request):
+    if request.method == 'GET':
+        return render(request,'leaves/add_leaves.html')
+
+    if request.method == 'POST':
+        from_date = request.POST.get('from_date')
+        to_date = request.POST.get('to_date')
+        leave_type = request.POST.get('leave_type')
+        description = request.POST.get('reason')  # 'reason' is the name attribute in your textarea
+
+        if not from_date or not to_date or not leave_type or not description:
+            messages.error(request, 'Please fill in all the fields.')
+            return render(request, 'leaves/add_leaves.html')
+
+        new_leave = Leave(
+            user=request.user,
+            from_date=from_date,
+            to_date=to_date,
+            leave_type=leave_type,
+            description=description,
+        )
+        new_leave.save()
+
+        messages.success(request, 'Applied Leave Successfully!')
+        return render(request, 'leaves/add_leaves.html')
 
