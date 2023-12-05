@@ -11,3 +11,8 @@ def add_attendance(request):
     if request.method == 'POST':
         checkin_desc = request.POST.get('checkin_desc')
 
+        # Get the current user and date
+        user = request.user
+        date_today = timezone.now().date()
+
+
