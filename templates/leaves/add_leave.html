@@ -10,3 +10,16 @@
     </ol>
   </nav>
 
+ <div class="card">
+    <div class="card-body">
+      <form action="{% url 'add-expenses' %}" method="post">
+        {% include 'partials/_messages.html'%} {% csrf_token %}
+        <div class="form-group">
+          <label for="">Amount</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            name="amount"
+            value="{{values.amount}}"
+          />
+        </div>
