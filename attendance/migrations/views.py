@@ -23,6 +23,15 @@ def add_attendance(request):
         now = timezone.now()
         checkin = now.astimezone(local_tz).time()
 
+        # Create and save the Attendance object
+        Attendance.objects.create(
+            user=user,
+            date_today=date_today,
+            checkin=checkin,
+            checkin_desc=checkin_desc
+        )
+
+
 
 
 
