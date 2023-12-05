@@ -54,3 +54,12 @@
         <td>{{expense.category}}</td>
         <td>{{expense.description}}</td>
         <td>{{expense.date}}</td>
+
+         <td>
+          <a
+            href="{% url 'expense-edit' expense.id  %}"
+            class="btn btn-secondary btn-sm"
+            >Edit</a
+          >
+        </td>
+      </tr>
