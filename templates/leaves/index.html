@@ -106,3 +106,19 @@
       <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
       <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
       {% endif %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+</div>
+
+<script src="{% static 'js/searchExpenses.js' %}"></script>
+
+
+
+
+</script>
+
+
+
+{% endblock content %}
