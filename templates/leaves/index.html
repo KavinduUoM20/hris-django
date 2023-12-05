@@ -16,3 +16,19 @@
     </div>
 
   </div>
+  <div class="row">
+    <div class="col-md-4">
+      <a href="{% url 'add_leaves'%}" class="btn btn-primary">Add Leave</a>
+    </div>
+    {% if request.user.is_staff %}
+    <div class="col-md-4">
+      <a href="{% url 'view_leaves'%}" class="btn btn-primary">View Leaves</a>
+    </div>
+    {% endif %}
+    <div class="col-md-4">
+      <a href="{% url 'my_leaves'%}" class="btn btn-primary">My Leaves</a>
+    </div>
+  </div>
+
+</div>
+{% endblock content%}
