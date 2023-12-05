@@ -55,6 +55,14 @@ def add_attendance(request):
             messages.warning(request, 'No attendance record found for today.')
             return redirect('view_attendance')
 
+        if request.method == 'POST':
+            checkout_desc = request.POST.get('checkout_desc')
+
+            # Set the desired time zone for the checkout
+            user_time_zone = 'Asia/Colombo'  # Replace with the desired time zone (e.g., Asia/Colombo for Sri Lanka)
+            local_tz = pytz.timezone(user_time_zone)
+
+
 
 
 
