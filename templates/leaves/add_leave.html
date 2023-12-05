@@ -13,6 +13,7 @@
       <li class="breadcrumb-item active" aria-current="page">Add Leave</li>
     </ol>
   </nav>
+
   <div class="card">
     <div class="card-body">
       <form action="{% url 'add_leaves' %}" method="post">
@@ -27,7 +28,7 @@
           />
         </div>
         <div class="form-group">
-                    <label for="to_date">End Date</label>
+          <label for="to_date">End Date</label>
           <input
             type="date"
             class="form-control form-control-sm"
@@ -52,7 +53,7 @@
           ></textarea>
         </div>
 
-                <input
+        <input
           type="submit"
           value="Submit"
           class="btn btn-primary btn-sm"
@@ -62,7 +63,3 @@
   </div>
 </div>
 {% endblock content %}
-
-
-
-
