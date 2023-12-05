@@ -10,17 +10,17 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="">Leaves</a>
+            <a href="">Expenses</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            My Leaves
+            My Expenses
           </li>
         </ol>
       </nav>
     </div>
 
     <div class="col-md-2">
-      <a href="{% url 'add-Leave'%}" class="btn btn-primary">Add Leave</a>
+      <a href="{% url 'add-expenses'%}" class="btn btn-primary">Add Expense</a>
     </div>
   </div>
 
@@ -41,7 +41,7 @@
   <table class="table table-stripped table-hover">
     <thead>
       <tr>
-        <th>Days ({{currency}})</th>
+        <th>Amount ({{currency}})</th>
         <th>Category</th>
         <th>Description</th>
         <th>Date</th>
@@ -50,22 +50,23 @@
     </thead>
 
     <tbody>
-      {% for Leave in page_obj%}
+      {% for expense in page_obj%}
       <tr>
-        <td>{{Leave.amount}}</td>
-        <td>{{Leave.category}}</td>
-        <td>{{Leave.description}}</td>
-        <td>{{Leave.date}}</td>
+        <td>{{expense.amount}}</td>
+        <td>{{expense.category}}</td>
+        <td>{{expense.description}}</td>
+        <td>{{expense.date}}</td>
 
         <td>
           <a
-            href="{% url 'Leave-edit' expense.id  %}"
+            href="{% url 'expense-edit' expense.id  %}"
             class="btn btn-secondary btn-sm"
             >Edit</a
           >
         </td>
       </tr>
-{% endfor %}
+
+      {% endfor %}
     </tbody>
   </table>
 </div>
@@ -92,7 +93,10 @@
       </table>
     </div>
 
- <div class="pagination-container">
+
+
+
+    <div class="pagination-container">
     <div class="">
       Showing page {{page_obj.number}} of {{ page_obj.paginator.num_pages }}
     </div>
@@ -106,6 +110,8 @@
       <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
       <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
       {% endif %}
+
+
       </ul>
     {% endif %}
   </div>
