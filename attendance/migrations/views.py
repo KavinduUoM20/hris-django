@@ -70,6 +70,12 @@ def add_attendance(request):
             today_attendance.checkout_desc = checkout_desc
             today_attendance.save()
 
+            messages.success(request, 'Checkout details updated successfully!')
+            return redirect('view_attendance')  # Redirect to the view_attendance page or any other page
+
+        return render(request, 'attendance/update_attendance.html', {'attendance': today_attendance})
+
+
 
 
 
