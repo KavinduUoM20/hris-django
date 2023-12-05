@@ -23,3 +23,17 @@
       <a href="{% url 'add-income'%}" class="btn btn-primary">Add Income</a>
     </div>
   </div>
+  <div class="container">
+    {% include 'partials/_messages.html' %}
+
+    {% if income.count %}
+
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="searchField" placeholder="Search">
+        </div>
+      </div>
+     </div>
