@@ -50,6 +50,12 @@ def add_attendance(request):
         user = request.user
         today_attendance = Attendance.objects.filter(user=user, date_today=timezone.now().date()).first()
 
+        if today_attendance is None:
+            # Handle the case where there is no attendance record for today
+            messages.warning(request, 'No attendance record found for today.')
+            return redirect('view_attendance')
+
+
 
 
 
