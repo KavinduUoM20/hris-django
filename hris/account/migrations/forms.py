@@ -13,3 +13,9 @@ class EmployeeCreateForm(forms.ModelForm):
 		widgets = {
 				'bio':forms.Textarea(attrs={'cols':5,'rows':5})
 		}
+
+class EmergencyCreateForm(forms.ModelForm):
+
+	class Meta:
+		model = Emergency
+		fields = ['employee','fullname','tel','location','relationship']
