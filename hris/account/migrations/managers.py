@@ -20,3 +20,14 @@ class EmployeeManager(models.Manager):
         Employee.objects.all_blocked_employees() -> returns list of blocked employees ie.is_blocked = True
         '''
         return super().get_queryset().filter(is_blocked=True)
+
+    def birthdays_current_month(self):
+        '''
+        This Method Fetches all the active users,whose date of birthday is in current month, "this month".
+        Every month list all employees whose birthday is in that month.
+
+        HowTo: Employee.objects.birthdays_current_month()
+
+        '''
+        current_date = datetime.date.today()
+        return super().get_queryset().filter(is_blocked=False).filter(birthday__month=current_date.month)
