@@ -55,4 +55,11 @@ def update_leave(request, leave_id):
 
     return redirect('view_leaves')  # Redirect back to the view_leaves page
 
+@login_required(login_url='/authentication/login')
+def my_leaves(request):
+    if request.method == 'GET':
+        user_leaves = Leave.objects.filter(user=request.user)
+        return render(request, 'leaves/my_leaves.html', {'user_leaves': user_leaves})
+
+
 
