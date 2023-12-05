@@ -36,3 +36,23 @@ def add_leaves(request):
         messages.success(request, 'Applied Leave Successfully!')
         return render(request, 'leaves/add_leaves.html')
 
+@allowed_users(allowed_roles=['admin'])
+def view_leaves(request):
+    if request.method == 'GET':
+        leaves = Leave.objects.all()
+        return render(request, 'leaves/view_leaves.html', {'leaves': leaves})
+
+def update_leave(request, leave_id):
+    if request.method == 'POST':
+        # Retrieve the Leave object based on leave_id
+        leave = Leave.objects.get(id=leave_id)
+
+        # Update the leave status (change it according to your logic)
+        leave.status = 'Approved'
+        leave.save()
+
+        messages.success(request, 'Leave status updated successfully!')
+
+    return redirect('view_leaves')  # Redirect back to the view_leaves page
+
+
