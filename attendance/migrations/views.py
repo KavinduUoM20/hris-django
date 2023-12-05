@@ -65,6 +65,11 @@ def add_attendance(request):
             # Get the current time in the user's time zone
             now = timezone.now()
             checkout = now.astimezone(local_tz).time()
+            # Update the Attendance object with checkout details
+            today_attendance.checkout = checkout
+            today_attendance.checkout_desc = checkout_desc
+            today_attendance.save()
+
 
 
 
