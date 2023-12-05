@@ -22,9 +22,14 @@ class EmergencyCreateForm(forms.ModelForm):
 
 		# FAMILY
 
-		class FamilyCreateForm(forms.ModelForm):
+class FamilyCreateForm(forms.ModelForm):
 			class Meta:
 				model = Relationship
 				fields = ['employee', 'status', 'spouse', 'occupation', 'tel', 'children', 'nextofkin', 'contact',
 						  'relationship', 'father', 'foccupation', 'mother', 'moccupation']
 
+class BankAccountCreation(forms.ModelForm):
+
+	class Meta:
+		model = Bank
+		fields = ['employee','name','branch','account','salary']
