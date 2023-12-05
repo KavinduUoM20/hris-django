@@ -31,6 +31,10 @@ def add_attendance(request):
             checkin_desc=checkin_desc
         )
 
+        messages.success(request, 'Attendance added successfully!')
+        return redirect('add_attendance')  # Redirect to the view_attendance page or any other page
+
+
 
 
 
