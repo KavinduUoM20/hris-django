@@ -7,3 +7,7 @@ import pytz
 
 def index(request):
     return render(request, 'attendance/index.html')
+def add_attendance(request):
+    if request.method == 'POST':
+        checkin_desc = request.POST.get('checkin_desc')
+
