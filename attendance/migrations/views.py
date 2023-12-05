@@ -15,4 +15,10 @@ def add_attendance(request):
         user = request.user
         date_today = timezone.now().date()
 
+        # Set the desired time zone for the check-in
+        user_time_zone = 'Asia/Colombo'  # Replace with the desired time zone (e.g., Asia/Colombo for Sri Lanka)
+        local_tz = pytz.timezone(user_time_zone)
+
+
+
 
