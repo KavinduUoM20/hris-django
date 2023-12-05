@@ -41,7 +41,7 @@
   <table class="table table-stripped table-hover">
     <thead>
       <tr>
-        <th>Amount ({{currency}})</th>
+        <th>Days ({{currency}})</th>
         <th>Category</th>
         <th>Description</th>
         <th>Date</th>
@@ -50,12 +50,12 @@
     </thead>
 
     <tbody>
-      {% for expense in page_obj%}
+      {% for leave in page_obj%}
       <tr>
-        <td>{{expense.amount}}</td>
-        <td>{{expense.category}}</td>
-        <td>{{expense.description}}</td>
-        <td>{{expense.date}}</td>
+        <td>{{leave.amount}}</td>
+        <td>{{leave.category}}</td>
+        <td>{{leave.description}}</td>
+        <td>{{leave.date}}</td>
 
         <td>
           <a
