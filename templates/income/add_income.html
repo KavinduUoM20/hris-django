@@ -31,3 +31,13 @@
             value="{{values.description}}"
           />
         </div>
+        <div class="form-group">
+          <label for="">Sources</label>
+          <select class="form-control" name="source">
+            {% for source in sources%}
+            <option name="source" value="{{source.name}}"
+              >{{source.name}}</option
+            >
+            {% endfor %}
+          </select>
+        </div>
