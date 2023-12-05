@@ -45,6 +45,12 @@ def add_attendance(request):
         # Your logic for viewing user-specific attendance goes here
         return render(request, 'attendance/my_attendance.html')
 
+    def update_attendance(request):
+        # Get today's attendance for the current user
+        user = request.user
+        today_attendance = Attendance.objects.filter(user=user, date_today=timezone.now().date()).first()
+
+
 
 
 
