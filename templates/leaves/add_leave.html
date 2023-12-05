@@ -15,11 +15,11 @@
       <form action="{% url 'add-leaves' %}" method="post">
         {% include 'partials/_messages.html'%} {% csrf_token %}
         <div class="form-group">
-          <label for="">Amount</label>
+          <label for="">Days</label>
           <input
             type="text"
             class="form-control form-control-sm"
-            name="amount"
-            value="{{values.amount}}"
+            name="Days"
+            value="{{Days.amount}}"
           />
         </div>
