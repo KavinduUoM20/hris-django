@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'leave_requests' %}">Leave Requests</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Edit Leave Request
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="col-md-2">
+      <a
+        href="{% url 'leave_request_delete' leave_request.id %}"
+        class="btn btn-danger btn-sm"
+      >
+        Delete
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form action="{% url 'edit_leave_request' leave_request.id %}" method="post">
+        {% include 'partials/_messages.html'%} {% csrf_token %}
+        <div class="form-group">
+          <label for="start_date">Start Date</label>
+          <input
+            type="date"
+            class="form-control form-control-sm"
+            name="start_date"
+            value="{{ leave_request.start_date }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="end_date">End Date</label>
+          <input
+            type="date"
+            class="form-control form-control-sm"
+            name="end_date"
+            value="{{ leave_request.end_date }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="leave_type">Leave Type</label>
+          <select class="form-control" name="leave_type">
+            <option value="vacation" {% if leave_request.leave_type == 'vacation' %}selected{% endif %}>Vacation</option>
+            <option value="sick" {% if leave_request.leave_type == 'sick' %}selected{% endif %}>Sick Leave</option>
+            <option value="personal" {% if leave_request.leave_type == 'personal' %}selected{% endif %}>Personal Leave</option>
+            <!-- Add more leave types as needed -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="reason">Reason</label>
+          <textarea
+            class="form-control"
+            name="reason"
+            rows="3"
+          >{{ leave_request.reason }}</textarea>
+        </div>
+
+        <input
+          type="submit"
+          value="Save"
+          class="btn btn-primary btn-sm"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
