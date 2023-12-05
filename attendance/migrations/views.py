@@ -34,6 +34,14 @@ def add_attendance(request):
         messages.success(request, 'Attendance added successfully!')
         return redirect('add_attendance')  # Redirect to the view_attendance page or any other page
 
+    return render(request, 'attendance/add_attendance.html')
+
+    def view_attendance(request):
+        # Retrieve all attendance records
+        attendances = Attendance.objects.all()
+        return render(request, 'attendance/view_attendance.html', {'attendances': attendances})
+
+
 
 
 
