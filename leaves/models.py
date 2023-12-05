@@ -15,3 +15,12 @@ class Leave(models.Model):
         ('approved', 'Approved'),
     ]
 
+user = models.ForeignKey(User, on_delete=models.CASCADE)
+    from_date = models.DateField(default=now)
+    to_date = models.DateField()
+    leave_type = models.CharField(max_length=20, choices=LEAVE_TYPES)
+    description = models.TextField()
+    status = models.CharField(max_length=20, choices=LEAVE_STATUS, default='requested')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.leave_type} Leave"
