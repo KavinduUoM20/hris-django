@@ -9,3 +9,9 @@ class Leave(models.Model):
         ('personal_leave', 'Personal Leave'),
     ]
 
+    LEAVE_STATUS = [
+        ('requested', 'Requested'),
+        ('rejected', 'Rejected'),
+        ('approved', 'Approved'),
+    ]
+
