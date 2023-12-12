@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>add attendance</h1>
+
+    {% include 'partials/_messages.html' %}
+
+    <p id="currentDateTime"></p>
+
+    <div class="row">
+        {% if not has_checkin_today %}
+        <div class="col-md-6">
+            <form class="row gy-2 gx-3 align-items-center" action="{% url 'add_attendance' %}" method="post">
+                {% csrf_token %}
+                <div class="col-auto">
+                    <label class="visually-hidden" for="checkin">Checkin Description</label>
+                    <input type="text" class="form-control" id="checkin" name="checkin_desc"
+                           placeholder="Checkin Description">
+                </div>
+
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Checkin</button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if has_checkin_today and not is_complete %}
+        <div class="col-md-6">
+            <form class="row gy-2 gx-3 align-items-center" method="post" action="{% url 'update_attendance' %}">
+                {% csrf_token %}
+                <div class="col-auto">
+                    <label class="visually-hidden" for="checkout_desc">Checkout Description</label>
+                    <input type="text" class="form-control" id="checkout_desc" name="checkout_desc"
+                           placeholder="Checkout Description">
+                </div>
+
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Checkout</button>
+                </div>
+            </form>
+
+        </div>
+        {% endif %}
+
+        {% if is_complete %}
+            <h1>Attendance Completed for today</h1>
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<script>
+    function updateDateTime() {
+        var currentDateTimeElement = document.getElementById('currentDateTime');
+        var now = new Date();
+        var formattedDateTime = now.toLocaleString();
+        currentDateTimeElement.textContent = 'Current Time and Date: ' + formattedDateTime;
+    }
+
+    // Update the time every second
+    setInterval(updateDateTime, 1000);
+
+    // Initial update
+    updateDateTime();
+</script>
+</div>
+
+{% endblock content %}
+

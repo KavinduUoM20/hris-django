@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+        </ol>
+    </nav>
+
+
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-body">
+                <a class="btn btn-warning" href="{% url 'dashboard' %}"> &#8592; Back to Profile</a>
+                <hr>
+                <h3 style="text-align: center">Account Settings</h3>
+                <hr>
+                <img class="profile-pic" src="{{request.user.account.profile_image.url}}">
+
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+            {% include 'partials/_messages.html'%}
+            </div>
+            <div class="card card-body">
+
+                <form method="POST" action="{% url 'edit_profile' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username"
+                               value="{{request.user.username}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">First name</label>
+                        <input type="text" class="form-control" name="first_name"
+                               value="{{request.user.first_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="last_name"
+                               value="{{request.user.last_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="phone"
+                               value="{{request.user.account.phone}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Email</label>
+                        <input type="text" class="form-control" name="email"
+                               value="{{request.user.account.email}}">
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="Update Information">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}

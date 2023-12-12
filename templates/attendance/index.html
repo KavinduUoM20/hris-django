@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Attendance</li>
+        </ol>
+      </nav>
+    </div>
+
+  </div>
+
+  <div class="row">
+    {% if not request.user.is_staff %}
+    <div class="col-md-4">
+      <a href="{% url 'add_attendance'%}" class="btn btn-primary">Add Attendance</a>
+    </div>
+    {% endif %}
+    {% if request.user.is_staff %}
+    <div class="col-md-4">
+      <a href="{% url 'view_attendance'%}" class="btn btn-primary">View Attendance</a>
+    </div>
+    {% endif %}
+    {% if not request.user.is_staff %}
+    <div class="col-md-4">
+      <a href="{% url 'my_attendance'%}" class="btn btn-primary">My Attendance</a>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock content%}

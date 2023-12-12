@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>view leaves</h1>
+
+{% include 'partials/_messages.html'%}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">employee</th>
+      <th scope="col">type</th>
+      <th scope="col">start</th>
+      <th scope="col">end</th>
+      <th scope="col">status</th>
+      <th scope="col">action</th>
+    </tr>
+  </thead>
+  <tbody>
+            {% for leave in leaves %}
+                <tr>
+                    <form method="post" action="{% url 'update_leave' leave.id %}">
+                        {% csrf_token %}
+                        <th scope="row">{{ leave.id }}</th>
+                        <td>{{ leave.user.username }}</td>
+                        <td>{{ leave.leave_type }}</td>
+                        <td>{{ leave.from_date }}</td>
+                        <td>{{ leave.to_date }}</td>
+                        <td>{{ leave.status }}</td>
+                        <td>
+                            {% if leave.status == 'requested' %}
+                                <button type="submit">Approve</button>
+                            {% else %}
+                                <button type="submit" disabled>Approved</button>
+                            {% endif %}
+                        </td>
+                    </form>
+                </tr>
+            {% endfor %}
+  </tbody>
+
+
+{% endblock content%}

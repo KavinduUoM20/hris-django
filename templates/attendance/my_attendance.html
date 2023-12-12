@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>View Attendance</h1>
+
+  {% include 'partials/_messages.html' %}
+
+  <form method="get" action="{% url 'my_attendance' %}">
+    <div class="mb-3">
+      <label for="start_date" class="form-label">Start Date:</label>
+      <input type="date" class="form-control" id="start_date" name="start_date">
+    </div>
+
+    <div class="mb-3">
+      <label for="end_date" class="form-label">End Date:</label>
+      <input type="date" class="form-control" id="end_date" name="end_date">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Checkin</th>
+        <th scope="col">Checkout</th>
+        <th scope="col">Hours</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for attendance in user_attendance %}
+        <tr>
+          <th scope="row">{{ attendance.id }}</th>
+          <td>{{ attendance.date_today }}</td>
+          <td>{{ attendance.checkin }}</td>
+          <td>{{ attendance.checkout }}</td>
+          <td>{{ attendance.hours }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Add Account</li>
+    </ol>
+  </nav>
+
+  <div class="card">
+    <div class="card-body">
+      <form action="{% url 'add_profile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- User Information -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" name="username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input type="text" class="form-control" name="first_name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input type="text" class="form-control" name="last_name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" required>
+        </div>
+
+        <!-- Account Information -->
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea class="form-control" name="address" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" name="phone">
+        </div>
+
+        <div class="form-group">
+          <label for="profile_image">Profile Image</label>
+          <input type="file" class="form-control-file" name="profile_image">
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
