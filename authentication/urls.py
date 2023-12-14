@@ -1,3 +1,4 @@
+
 from .views import RegistrationView,UsernameValidationView,LoginView,LogoutView
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
