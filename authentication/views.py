@@ -34,7 +34,7 @@ class RegistrationView(View):
 
 class LoginView(View):
     def get(self,request):
-        return render(request, 'authentication/login.html')
+        return render(request, 'authentication/login-light-login.html')
 
     def post(self, request):
         username = request.POST['username']

@@ -51,7 +51,7 @@ def add_profile(request):
         messages.success(request, 'Account successfully created.')
 
         # Redirect to the dashboard or another appropriate page
-        return redirect('dashboard')
+        return redirect('edit_profile')
 
     return HttpResponse("Method Not Allowed", status=405)
 
