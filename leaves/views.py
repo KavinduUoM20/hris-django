@@ -7,7 +7,8 @@ from hris.decorators import allowed_users
 @login_required(login_url='/authentication/login')
 @allowed_users(allowed_roles=['employee','admin'])
 def index(request):
-    return render(request,'leaves/index.html')
+    #return render(request,'leaves/index.html')
+    return render(request,'wrapper.html')
 
 @allowed_users(allowed_roles=['employee'])
 def add_leaves(request):
@@ -60,6 +61,3 @@ def my_leaves(request):
     if request.method == 'GET':
         user_leaves = Leave.objects.filter(user=request.user)
         return render(request, 'leaves/my_leaves.html', {'user_leaves': user_leaves})
-
-
-

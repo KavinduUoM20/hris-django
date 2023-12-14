@@ -12,11 +12,10 @@
 
       <div class="card-body">
         <div class="card-title py-3">
-          <h4>Login to your  account</h4>
+          <h4>Login to Your  Account</h4>
         </div>
         <form action="{% url 'login' %}" method="post">
           {% csrf_token %}
-
           {% include 'partials/_messages.html' %}
           <div class="form-group">
             <input
@@ -48,6 +47,6 @@
   <div class="col-md-4"></div>
 </div>
 
-<script src="{% static 'js/register.js' %}"></script>
+<script src=""></script>
 
 {% endblock content %}

@@ -1,44 +1,158 @@
-{% extends 'base.html' %}
+{% extends 'wrapper.html' %}
 
-{% block content %}
-<h1>view leaves</h1>
 
-{% include 'partials/_messages.html'%}
+<!--<h1>view leaves</h1>-->
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">employee</th>
-      <th scope="col">type</th>
-      <th scope="col">start</th>
-      <th scope="col">end</th>
-      <th scope="col">status</th>
-      <th scope="col">action</th>
-    </tr>
-  </thead>
-  <tbody>
-            {% for leave in leaves %}
+<!--{% include 'partials/_messages.html'%}-->
+
+<!--<table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th scope="col">#</th>-->
+<!--        <th scope="col">employee</th>-->
+<!--        <th scope="col">type</th>-->
+<!--        <th scope="col">start</th>-->
+<!--        <th scope="col">end</th>-->
+<!--        <th scope="col">status</th>-->
+<!--        <th scope="col">action</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    {% for leave in leaves %}-->
+<!--    <tr>-->
+<!--        <form method="post" action="{% url 'update_leave' leave.id %}">-->
+<!--            {% csrf_token %}-->
+<!--            <th scope="row">{{ leave.id }}</th>-->
+<!--            <td>{{ leave.user.username }}</td>-->
+<!--            <td>{{ leave.leave_type }}</td>-->
+<!--            <td>{{ leave.from_date }}</td>-->
+<!--            <td>{{ leave.to_date }}</td>-->
+<!--            <td>{{ leave.status }}</td>-->
+<!--            <td>-->
+<!--                {% if leave.status == 'requested' %}-->
+<!--                <button type="submit">Approve</button>-->
+<!--                {% else %}-->
+<!--                <button type="submit" disabled>Approved</button>-->
+<!--                {% endif %}-->
+<!--            </td>-->
+<!--        </form>-->
+<!--    </tr>-->
+<!--    {% endfor %}-->
+<!--    </tbody>-->
+
+    {% block content %}
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
+            <h2 class="intro-y text-lg font-medium mr-2">
+                View Leaves
+            </h2>
+            <div class="hidden xl:block mx-auto text-slate-500">View Leave Details</div>
+            <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
+                <div class="w-56 relative text-slate-500">
+                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                </div>
+                <div class="dropdown ml-2">
+                    <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
+                        <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4"
+                                                                                   data-lucide="plus"></i> </span>
+                    </button>
+                    <div class="dropdown-menu w-40">
+                        <ul class="dropdown-content">
+                            <li>
+                                <a href="" class="dropdown-item"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i>
+                                    Print </a>
+                            </li>
+                            <li>
+                                <a href="" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
+                                    Export to Excel </a>
+                            </li>
+                            <li>
+                                <a href="" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
+                                    Export to PDF </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <select class="w-56 xl:w-auto form-select box ml-2">
+                    <option>Status</option>
+                    <option>Active</option>
+                    <option>Inactive</option>
+                </select>
+            </div>
+        </div>
+        <!-- BEGIN: Data List -->
+        <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
+            <table class="table table-report -mt-2">
+                <thead>
                 <tr>
+                    <th class="whitespace-nowrap">
+                        <input class="form-check-input" type="checkbox">
+                    </th>
+                    <th class="text-center whitespace-nowrap">Employee</th>
+                    <th class="text-center whitespace-nowrap">Type</th>
+                    <th class="text-center whitespace-nowrap">Start Date</th>
+                    <th class="text-center whitespace-nowrap">End Date</th>
+                    <th class="text-center whitespace-nowrap">Leave Status</th>
+                    <th class="text-center whitespace-nowrap">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for leave in leaves %}
+                <tr class="intro-x">
                     <form method="post" action="{% url 'update_leave' leave.id %}">
-                        {% csrf_token %}
-                        <th scope="row">{{ leave.id }}</th>
-                        <td>{{ leave.user.username }}</td>
-                        <td>{{ leave.leave_type }}</td>
-                        <td>{{ leave.from_date }}</td>
-                        <td>{{ leave.to_date }}</td>
-                        <td>{{ leave.status }}</td>
-                        <td>
-                            {% if leave.status == 'requested' %}
-                                <button type="submit">Approve</button>
+                    {% csrf_token %}
+                    <td class="w-10">
+                        <input class="form-check-input" type="checkbox">
+                    </td>
+                    <td class="!py-3.5">
+                        <div class="flex items-center">
+                            <div class="w-9 h-9 image-fit zoom-in">
+                                <img alt="" class="rounded-lg border-white shadow-md tooltip"
+                                     src="{{ leave.user.account.profile_image.url}}">
+                            </div>
+                            <div class="ml-4">
+                                <a href="" class="font-medium whitespace-nowrap">{{ leave.user.username }}</a>
+                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{leave.user.account.email}}
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-left">{{ leave.leave_type }}</td>
+                    <td class="text-left">{{ leave.from_date }}</td>
+                    <td class="text-left">{{ leave.to_date }}</td>
+                    <td class="w-40">
+                        {% if leave.status == 'requested' %}
+                        <div class="flex items-center justify-center text-success"><i data-lucide="send"
+                                                                                      class="w-4 h-4 mr-2"></i>
+                            Requested
+                        </div>
+                        {% else %}
+                        <div class="flex items-center justify-center text-success"><i data-lucide="check-square"
+                                                                                      class="w-4 h-4 mr-2"></i>
+                            Approved
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td class="table-report__action w-56">
+                        <div class="flex justify-center items-center">
+                            {% if leave.status == 'requested' %}</i>
+                            <button class="text-danger" type="submit">Approve</button>
                             {% else %}
-                                <button type="submit" disabled>Approved</button>
+                            Approved
                             {% endif %}
-                        </td>
+                        </div>
+                    </td>
                     </form>
                 </tr>
-            {% endfor %}
-  </tbody>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- END: Data List -->
 
+        <!-- BEGIN: Pagination -->
+        <!-- END: Pagination -->
 
-{% endblock content%}
+    </div>
+    {% endblock content%}

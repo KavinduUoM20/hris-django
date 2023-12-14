@@ -1,57 +1,84 @@
-{% extends 'base.html' %}
+{% extends 'wrapper.html' %}
 
 {% block content %}
-<div class="container mt-5">
-<h1>add attendance</h1>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-6">
+        <!-- BEGIN: Form Validation -->
+        <div class="intro-y box">
+            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                <h2 class="font-medium text-base mr-auto">
+                    Attendance
+                </h2>
+            </div>
+            <div id="form" class="p-5">
 
 
-<p id="currentDateTime"></p>
+                <p id="currentDateTime"></p>
 
-{% if attendance %}
+                <div class="row">
+                    {% if not has_checkin_today %}
+                    <div class="col-md-6">
+                        <form class="row gy-2 gx-3 align-items-center" action="{% url 'add_attendance' %}"
+                              method="post">
+                            {% csrf_token %}
+                            <div class="col-auto">
+                                <label class="visually-hidden" for="checkin">Checkin Description</label>
+                                <input type="text" class="form-control" id="checkin" name="checkin_desc"
+                                       placeholder="Checkin Description">
+                            </div>
 
-<form class="row gy-2 gx-3 align-items-center" action="{% url 'add_attendance' %}">
-  {% include 'partials/_messages.html'%}
-  {% csrf_token %}
-  <div class="col-auto">
-    <label class="visually-hidden" for="checkin">Checkin Description</label>
-    <input type="text" class="form-control" id="checkin" placeholder="Checkin Description">
-  </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">Checkin</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
 
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
+                    {% if has_checkin_today and not is_complete %}
+                    <div class="col-md-6">
+                        <form class="row gy-2 gx-3 align-items-center" method="post"
+                              action="{% url 'update_attendance' %}">
+                            {% csrf_token %}
+                            <div class="col-auto">
+                                <label class="visually-hidden" for="checkout_desc">Checkout Description</label>
+                                <input type="text" class="form-control" id="checkout_desc" name="checkout_desc"
+                                       placeholder="Checkout Description">
+                            </div>
 
-{% else %}
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">Checkout</button>
+                            </div>
+                        </form>
 
-<form class="row gy-2 gx-3 align-items-center" method="post" action="{% url 'update_attendance' %}">
-    {% csrf_token %}
-    <div class="col-auto">
-      <label class="visually-hidden" for="checkout_desc">Checkout Description</label>
-      <input type="text" class="form-control" id="checkout_desc" name="checkout_desc" placeholder="Checkout Description">
+                    </div>
+                    {% endif %}
+
+                    {% if is_complete %}
+                    <h1 class="font-medium text-base mr-auto"> Attendance Completed for today</h1>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-auto">
-      <button type="submit" class="btn btn-primary">Update Checkout</button>
-    </div>
-</form>
 
-{% endif %}
+    <script>
+        function updateDateTime() {
+            var currentDateTimeElement = document.getElementById('currentDateTime');
+            var now = new Date();
+            var formattedDateTime = now.toLocaleString();
+            currentDateTimeElement.textContent = 'Current Time and Date: ' + formattedDateTime;
+        }
 
-<script>
-function updateDateTime() {
-    var currentDateTimeElement = document.getElementById('currentDateTime');
-    var now = new Date();
-    var formattedDateTime = now.toLocaleString();
-    currentDateTimeElement.textContent = 'Current Time and Date: ' + formattedDateTime;
-}
+        // Update the time every second
+        setInterval(updateDateTime, 1000);
 
-// Update the time every second
-setInterval(updateDateTime, 1000);
-
-// Initial update
-updateDateTime();
-</script>
+        // Initial update
+        updateDateTime();
+    </script>
 </div>
 
 {% endblock content %}
+

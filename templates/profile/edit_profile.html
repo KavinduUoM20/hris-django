@@ -1,0 +1,151 @@
+{% extends 'wrapper.html' %}
+
+
+<style>
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+        </ol>
+    </nav>
+
+
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-body">
+                <a class="btn btn-warning" href="{% url 'dashboard' %}"> &#8592; Back to Profile</a>
+                <hr>
+                <h3 style="text-align: center">Account Settings</h3>
+                <hr>
+                <img class="profile-pic" src="{{request.user.account.profile_image.url}}">
+
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                {% include 'partials/_messages.html'%}
+            </div>
+            <div class="card card-body">
+
+                <form method="POST" action="{% url 'edit_profile' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username"
+                               value="{{request.user.username}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">First name</label>
+                        <input type="text" class="form-control" name="first_name"
+                               value="{{request.user.first_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="last_name"
+                               value="{{request.user.last_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="phone"
+                               value="{{request.user.account.phone}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Email</label>
+                        <input type="text" class="form-control" name="email"
+                               value="{{request.user.account.email}}">
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="Update Information">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% block content %}
+<div class="grid grid-cols-12 gap-6 mt-5">
+<div class="intro-y flex items-center mt-8">
+    <h2 class="text-lg font-medium mr-auto">
+        Account Settings
+    </h2>
+</div>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-6">
+        <!-- BEGIN: Form Validation -->
+        <div class="intro-y box">
+            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                <h2 class="font-medium text-base mr-auto">
+                    Edit Account Settings
+                </h2>
+            </div>
+            <div id="form-validation" class="p-5">
+                <div class="preview">
+                    <!-- BEGIN: Validation Form -->
+                    <form method="POST" action="{% url 'edit_profile' %}">
+                        {% csrf_token %}
+                        <div class="input-form">
+                            <label class="form-label w-full flex flex-col sm:flex-row"> Username
+                                <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Provide a Username</span>
+                            </label>
+                            <input type="text" name="username" class="form-control"
+                                   placeholder="John Legend" minlength="2" value="{{request.user.username}}" required>
+                        </div>
+                        <div class="input-form">
+                            <label class="form-label w-full flex flex-col sm:flex-row"> Firstname
+                                <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Provide a Your Firstname</span>
+                            </label>
+                            <input id="" type="text" name="first_name" class="form-control"
+                                   placeholder="John Legend" minlength="2" value="{{request.user.first_name}}" required>
+                        </div>
+                        <div class="input-form">
+                            <label class="form-label w-full flex flex-col sm:flex-row"> Lastname
+                                <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Provide Your Lastname</span>
+                            </label>
+                            <input type="text" name="last_name" class="form-control"
+                                   value="{{request.user.last_name}}" minlength="2" required>
+                        </div>
+                        <div class="input-form">
+                            <label class="form-label w-full flex flex-col sm:flex-row"> Phone
+                                <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Provide Phone Number</span>
+                            </label>
+                            <input type="text" name="phone" class="form-control"
+                                   value="{{request.user.account.phone}}" minlength="2" required>
+                        </div>
+                        <div class="input-form mt-3">
+                            <label class="form-label w-full flex flex-col sm:flex-row"> Email
+                                <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Required, email address format</span>
+                            </label>
+                            <input type="email" name="email" class="form-control"
+                                   value="{{request.user.account.email}}" required>
+                        </div>
+                        <div class="input-form">
+                            <label class="form-label w-full flex flex-col sm:flex-row"> Address
+                                <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-slate-500">Provide Address</span>
+                            </label>
+                            <input type="text" name="address" class="form-control"
+                                   value="{{request.user.account.address}}"  required>
+                        </div>
+                        <button type="submit" name="Update Information" class="btn btn-primary mt-5">Register</button>
+                    </form>
+                    <!-- END: Validation Form -->
+
+            </div>
+        </div>
+        <!-- END: Form Validation -->
+    </div>
+</div>
+</div>
+{% endblock content %}

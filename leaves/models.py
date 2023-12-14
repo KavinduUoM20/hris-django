@@ -14,8 +14,8 @@ class Leave(models.Model):
         ('rejected', 'Rejected'),
         ('approved', 'Approved'),
     ]
-
-user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     from_date = models.DateField(default=now)
     to_date = models.DateField()
     leave_type = models.CharField(max_length=20, choices=LEAVE_TYPES)

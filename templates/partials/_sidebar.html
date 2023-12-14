@@ -5,79 +5,21 @@
       <li class="nav-item">
         <a class="nav-link active" href="#">
           <span data-feather="home"></span>
-          Dashboard <span class="sr-only"></span>
+          Dashboard <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'employee_profiles' %}">
-          Employee Profiles
+        <a class="nav-link" href="{% url 'leaves' %}">
+          Leaves
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'leave_requests' %}">
-          Leave Requests
+        <a class="nav-link" href="{% url 'attendance' %}">
+          Attendance
         </a>
       </li>
     </ul>
 
-    <!-- Assuming different sections for HR managers and employees -->
-    {% if user_is_hr_manager %}
-      <!-- HR Manager Section -->
-      <h6
-        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-      >
-        <span>HR Manager Section</span>
-        <a
-          class="d-flex align-items-center text-muted"
-          href="#"
-          aria-label="Add a new report"
-        >
-          <span data-feather="plus-circle"></span>
-        </a>
-      </h6>
-      <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'hr_stats' %}">
-            HR Statistics
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span data-feather="file-text"></span>
-            HR Reports
-          </a>
-        </li>
-      </ul>
-    {% endif %}
-
-    <!-- Common Section for both HR managers and Employees -->
-    <h6
-      class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-    >
-      <span>Common Section</span>
-      <a
-        class="d-flex align-items-center text-muted"
-        href="#"
-        aria-label="Add a new report"
-      >
-        <span data-feather="plus-circle"></span>
-      </a>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'summary' %}">
-          Summary
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Reports
-        </a>
-      </li>
-    </ul>
-
-    <!-- Settings Section for both HR managers and Employees -->
     <h6
       class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
     >
@@ -92,12 +34,7 @@
     </h6>
     <ul class="nav flex-column mb-2">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'general_settings' %}">
-          General
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{% url 'dashboard' %}">
           <span data-feather="file-text"></span>
           Account
         </a>
